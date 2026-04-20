@@ -12,32 +12,26 @@ import ShakenCost from '../../components/ShakenCost.svelte';
     { name: '車検費用シミュレーター', url: '/tools/shaken-cost' },
   ]}
 >
-  <h1 class="text-3xl font-bold text-white mb-2">🔧 車検費用シミュレーター</h1>
-  <p class="text-slate-400 mb-8">法定費用の内訳と整備費用の目安を試算します。受検場所ごとに比較可能。</p>
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">🔧 車検費用シミュレーター</h1>
+    <p class="text-gray-500">法定費用の内訳と整備費用の目安を試算します。受検場所ごとに比較可能。</p>
+  </div>
 
-  <ShakenCost client:load />
+  <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <ShakenCost client:load />
+  </div>
 
-  <section class="mt-16 prose prose-invert prose-sky max-w-none">
+  <section class="mt-16 prose prose-gray prose-sky max-w-none">
     <h2>車検費用の内訳</h2>
-    <p>
-      車検費用は大きく「法定費用」と「整備費用」に分かれます。
-      法定費用は全国一律で自賠責保険料・自動車重量税・印紙代の3種類。
-      整備費用は受検場所によって大きく異なります。
-    </p>
-    <h3>車検を受ける場所の違い</h3>
+    <p>車検費用は「法定費用」（全国一律）と「整備費用」（場所により異なる）に分かれます。</p>
     <ul>
-      <li><strong>ディーラー</strong>：純正部品使用・安心感あり。費用は最も高め。</li>
-      <li><strong>整備工場</strong>：地域の整備工場。ディーラーより安く丁寧なことが多い。</li>
-      <li><strong>車検専門店</strong>（コバック・車検のコバック等）：価格重視。最低限の整備。</li>
-      <li><strong>ユーザー車検</strong>：自分で陸運局に持ち込み。法定費用のみで最安。整備知識が必要。</li>
+      <li><strong>ディーラー</strong>：純正部品・安心感あり。費用は最も高め。</li>
+      <li><strong>整備工場</strong>：地域の整備工場。ディーラーより安いことが多い。</li>
+      <li><strong>車検専門店</strong>：価格重視。最低限の整備。</li>
+      <li><strong>ユーザー車検</strong>：法定費用のみで最安。整備知識が必要。</li>
     </ul>
-    <h3>エコカー減税（重量税）</h3>
-    <p>
-      電気自動車・燃費基準達成車はエコカー減税の対象となり、自動車重量税が50%または免税になります。
-      対象車種や減税率は国土交通省の公式情報をご確認ください。
-    </p>
-    <p class="text-sm text-slate-500">
-      ※ 整備費用は目安です。実際の費用は車両状態・店舗により大きく異なります。複数社での見積もりをおすすめします。
+    <p class="text-sm text-gray-400">
+      ※ 整備費用は目安です。実際の費用は車両状態・店舗により大きく異なります。
     </p>
   </section>
 </BaseLayout>

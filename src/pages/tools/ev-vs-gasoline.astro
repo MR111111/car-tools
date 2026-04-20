@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import EvVsGasoline from '../../components/EvVsGasoline.svelte';
+import PriceNotice from '../../components/PriceNotice.astro';
 ---
 
 <BaseLayout
@@ -12,30 +13,29 @@ import EvVsGasoline from '../../components/EvVsGasoline.svelte';
     { name: 'EV vs ガソリン比較', url: '/tools/ev-vs-gasoline' },
   ]}
 >
-  <h1 class="text-3xl font-bold text-white mb-2">⚡ EV充電コスト vs ガソリン代比較ツール</h1>
-  <p class="text-slate-400 mb-8">電気自動車とガソリン車の燃料コストを比較し、損益分岐点を計算します。</p>
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">⚡ EV充電コスト vs ガソリン代比較ツール</h1>
+    <p class="text-gray-500">電気自動車とガソリン車の燃料コストを比較し、損益分岐点を計算します。</p>
+  </div>
 
-  <EvVsGasoline client:load />
+  <PriceNotice type="both" />
 
-  <section class="mt-16 prose prose-invert prose-sky max-w-none">
+  <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <EvVsGasoline client:load />
+  </div>
+
+  <section class="mt-16 prose prose-gray prose-sky max-w-none">
     <h2>EVとガソリン車のコスト比較の考え方</h2>
     <p>
       EVの充電コストは、自宅充電と急速充電の割合によって大きく変わります。
-      自宅充電（夜間電力プランなら15〜25円/kWh）を多用するほどコストは低くなり、
-      急速充電（55〜80円/分程度）を多用するとコストが上がります。
+      自宅充電（夜間電力プランなら15〜25円/kWh）を多用するほどコストは低くなります。
     </p>
     <h3>電費（km/kWh）とは</h3>
     <p>
       ガソリン車の燃費が「km/L」であるように、EVの電費は「km/kWh」で表されます。
       国産EV（日産リーフ・テスラ等）の実燃費は概ね5〜8km/kWhが目安です。
     </p>
-    <h3>損益分岐点の計算</h3>
-    <p>
-      EVはガソリン車より車両価格が高い傾向にあります。
-      この価格差を月々の燃料費削減額で回収するまでの期間が「損益分岐点（月）」です。
-      走行距離が多いほど、また自宅充電割合が高いほど損益分岐点は早くなります。
-    </p>
-    <p class="text-sm text-slate-500">
+    <p class="text-sm text-gray-400">
       ※ 計算結果は参考値です。急速充電コストは充電設備・プランにより異なります。
     </p>
   </section>

@@ -12,29 +12,21 @@ import TireSize from '../../components/TireSize.svelte';
     { name: 'タイヤサイズチェッカー', url: '/tools/tire-size' },
   ]}
 >
-  <h1 class="text-3xl font-bold text-white mb-2">🚗 タイヤサイズ互換チェッカー</h1>
-  <p class="text-slate-400 mb-8">タイヤサイズ変更時の外径差・速度メーター誤差・互換性を確認できます。</p>
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">🚗 タイヤサイズ互換チェッカー</h1>
+    <p class="text-gray-500">タイヤサイズ変更時の外径差・速度メーター誤差・互換性を確認できます。</p>
+  </div>
 
-  <TireSize client:load />
+  <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <TireSize client:load />
+  </div>
 
-  <section class="mt-16 prose prose-invert prose-sky max-w-none">
+  <section class="mt-16 prose prose-gray prose-sky max-w-none">
     <h2>タイヤサイズの読み方</h2>
-    <p>
-      「205/55R16」の場合、205がタイヤ幅（mm）、55が扁平率（%）、16がホイール径（インチ）を表します。
-      外径は「ホイール径×25.4 + タイヤ幅×扁平率÷100×2」で計算します。
-    </p>
+    <p>「205/55R16」の場合、205がタイヤ幅（mm）、55が扁平率（%）、16がホイール径（インチ）。</p>
     <h3>外径差±3%が互換性の目安</h3>
-    <p>
-      外径差が大きいと速度メーターの誤差・車体との干渉・ABSの誤作動などのリスクがあります。
-      一般的に外径差±3%以内が安全な変更範囲の目安とされています。
-    </p>
-    <h3>インチアップとは</h3>
-    <p>
-      ホイール径を大きくする（例：16→17インチ）ことをインチアップといいます。
-      インチアップ時は外径を維持するために扁平率を下げる必要があります。
-      このツールの「推奨扁平率」機能でインチアップ後の適切なサイズを確認できます。
-    </p>
-    <p class="text-sm text-slate-500">
+    <p>外径差が大きいと速度メーターの誤差・車体との干渉・ABSの誤作動などのリスクがあります。</p>
+    <p class="text-sm text-gray-400">
       ※ 計算結果は参考値です。実際の装着可否はタイヤ・ホイールメーカーまたは販売店にご確認ください。
     </p>
   </section>

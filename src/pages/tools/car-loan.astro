@@ -12,31 +12,24 @@ import CarLoan from '../../components/CarLoan.svelte';
     { name: '残価ローン比較', url: '/tools/car-loan' },
   ]}
 >
-  <h1 class="text-3xl font-bold text-white mb-2">💴 残価設定ローン比較ツール</h1>
-  <p class="text-slate-400 mb-8">通常ローンと残価設定ローンの月々・総支払額を比較します。</p>
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">💴 残価設定ローン比較ツール</h1>
+    <p class="text-gray-500">通常ローンと残価設定ローンの月々・総支払額を比較します。</p>
+  </div>
 
-  <CarLoan client:load />
+  <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <CarLoan client:load />
+  </div>
 
-  <section class="mt-16 prose prose-invert prose-sky max-w-none">
+  <section class="mt-16 prose prose-gray prose-sky max-w-none">
     <h2>残価設定ローンとは</h2>
-    <p>
-      残価設定ローン（残クレ）とは、車両価格の一定割合（残価）を最終回に一括払いとして据え置き、
-      残額のみをローンで返済する仕組みです。月々の返済額を抑えられる一方で注意点もあります。
-    </p>
-    <h3>残価設定ローンのメリット</h3>
+    <p>車両価格の一定割合（残価）を最終回に据え置き、残額のみをローン返済する仕組みです。月々の負担を抑えられますが注意点があります。</p>
     <ul>
-      <li>月々の返済額を通常ローンより大幅に抑えられる</li>
-      <li>ローン期間満了時に返却・乗り換えを選択できる</li>
-      <li>常に新しい車に乗り続けやすい</li>
+      <li><strong>走行距離制限</strong>：超過すると追加費用が発生</li>
+      <li><strong>残価割れリスク</strong>：中古車相場の下落で損をするケースも</li>
+      <li><strong>途中解約が難しい</strong>：違約金が発生することが多い</li>
     </ul>
-    <h3>残価設定ローンのデメリット・注意点</h3>
-    <ul>
-      <li><strong>走行距離制限</strong>：超過すると追加費用が発生（例：1万km/年）</li>
-      <li><strong>残価割れリスク</strong>：中古車市場の暴落で残価が時価を上回ることも</li>
-      <li><strong>傷・劣化の精算</strong>：返却時に傷・汚れの補修費用が請求される場合あり</li>
-      <li><strong>途中解約が難しい</strong>：期間中の乗り換えには違約金が発生することが多い</li>
-    </ul>
-    <p class="text-sm text-slate-500">
+    <p class="text-sm text-gray-400">
       ※ 計算は元利均等返済方式による参考値です。実際のローン条件は金融機関・ディーラーにご確認ください。
     </p>
   </section>

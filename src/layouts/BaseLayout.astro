@@ -25,7 +25,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
 const gsvCode = import.meta.env.PUBLIC_GSV_CODE;
 const isProd = import.meta.env.PROD;
 
-const siteTitle = 'CarTools';
+const siteTitle = 'CarMoneyLab';
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const canonical = canonicalURL || Astro.url.href;
 const ogImageURL = new URL(ogImage, Astro.site).href;
@@ -98,7 +98,7 @@ const breadcrumbJsonLd = breadcrumbs
       <script type="application/ld+json" set:html={breadcrumbJsonLd} />
     )}
   </head>
-  <body class="min-h-screen flex flex-col bg-slate-950 text-slate-100 antialiased">
+  <body class="min-h-screen flex flex-col bg-gray-50 text-gray-900 antialiased">
     <Header />
     <main class="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
       <slot />

@@ -6,7 +6,7 @@ import svelte from '@astrojs/svelte';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://car-tools.com',
+  site: 'https://carmoneylab.com',
   vite: {
     plugins: [tailwindcss()]
   },

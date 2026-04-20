@@ -1,0 +1,32 @@
+---
+interface Props {
+  type?: 'gasoline' | 'electricity' | 'both';
+}
+const { type = 'gasoline' } = Astro.props;
+---
+
+<div class="bg-sky-50 border border-sky-200 rounded-lg px-4 py-3 mb-6 flex items-start gap-3">
+  <span class="text-sky-500 text-lg mt-0.5">💡</span>
+  <div class="text-sm text-sky-800">
+    {type === 'gasoline' && (
+      <>
+        <strong>ガソリン価格は毎週変動します。</strong>
+        スライダーで現在の価格に合わせてください。
+        最新価格は <a href="https://gogo.gs/" target="_blank" rel="noopener noreferrer" class="underline font-medium hover:text-sky-600">gogo.gs</a> で確認できます。
+      </>
+    )}
+    {type === 'electricity' && (
+      <>
+        <strong>電気料金は契約プランにより異なります。</strong>
+        電力会社のマイページや明細で実際の単価をご確認の上、スライダーで調整してください。
+      </>
+    )}
+    {type === 'both' && (
+      <>
+        <strong>ガソリン・電気料金は日々変動します。</strong>
+        スライダーで現在の価格に調整してください。
+        ガソリン最新価格: <a href="https://gogo.gs/" target="_blank" rel="noopener noreferrer" class="underline font-medium hover:text-sky-600">gogo.gs</a>
+      </>
+    )}
+  </div>
+</div>
