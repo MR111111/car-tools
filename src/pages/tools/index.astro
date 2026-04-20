@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const tools = [
+  {
+    href: '/tools/gasoline-cost',
+    icon: '⛽',
+    title: 'ガソリン代計算ツール',
+    desc: '月間走行距離・燃費・ガソリン単価から月額・年額・1km単価を計算します。燃費改善の節約効果も試算可能。',
+    tags: ['燃費', 'ガソリン', '維持費'],
+  },
+  {
+    href: '/tools/ev-vs-gasoline',
+    icon: '⚡',
+    title: 'EV充電コスト vs ガソリン代比較',
+    desc: '電気自動車とガソリン車の燃料コストを月別・年別・10年間で比較。損益分岐の走行距離も算出。',
+    tags: ['EV', '電気自動車', 'コスト比較'],
+  },
+  {
+    href: '/tools/jidosha-zei',
+    icon: '🏛️',
+    title: '自動車税計算ツール',
+    desc: '排気量・登録年数・EV/HV区分から自動車税（種別割）と自動車重量税の目安を計算。重課・エコカー減税にも対応。',
+    tags: ['自動車税', '税金', '重量税'],
+  },
+  {
+    href: '/tools/shaken-cost',
+    icon: '🔧',
+    title: '車検費用シミュレーター',
+    desc: '法定費用（自賠責・重量税・印紙代）と整備費用の目安を、車種・重量・受検場所ごとに試算。',
+    tags: ['車検', '法定費用', '整備費用'],
+  },
+  {
+    href: '/tools/tire-size',
+    icon: '🚗',
+    title: 'タイヤサイズ互換チェッカー',
+    desc: 'インチアップ・サイズ変更時の外径差・速度メーター誤差を計算。±3%以内なら互換性ありと判定。',
+    tags: ['タイヤ', 'インチアップ', '互換性'],
+  },
+  {
+    href: '/tools/car-loan',
+    icon: '💴',
+    title: '残価設定ローン比較ツール',
+    desc: '通常ローンと残価設定ローンの月々返済額・総支払額・利息を比較。残価設定ローンの注意点も解説。',
+    tags: ['カーローン', '残価設定', '購入'],
+  },
+];
+---
+
+<BaseLayout
+  title="自動車計算ツール一覧"
+  description="ガソリン代・EV比較・自動車税・車検費用・タイヤサイズ・カーローンなど、自動車コストに関する無料計算ツールを一覧で紹介します。"
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: 'ツール一覧', url: '/tools' },
+  ]}
+>
+  <h1 class="text-3xl font-bold text-white mb-4">無料計算ツール一覧</h1>
+  <p class="text-slate-400 mb-10">自動車に関するコストをスマホでも簡単に計算。すべて無料・登録不要・個人情報不要。</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {tools.map(tool => (
+      <a
+        href={tool.href}
+        class="bg-slate-800 border border-slate-700 rounded-xl p-6 hover:border-sky-500 hover:bg-slate-700 transition-all group"
+      >
+        <div class="text-4xl mb-4">{tool.icon}</div>
+        <h2 class="text-white font-bold text-xl mb-2 group-hover:text-sky-400 transition-colors">{tool.title}</h2>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">{tool.desc}</p>
+        <div class="flex flex-wrap gap-2">
+          {tool.tags.map(tag => (
+            <span class="text-xs bg-slate-700 text-sky-300 px-2 py-1 rounded-full">{tag}</span>
+          ))}
+        </div>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+const navLinks = [
+  { href: '/tools', label: 'ツール一覧' },
+  { href: '/blog', label: 'ブログ' },
+  { href: '/about', label: 'サイトについて' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 text-sky-400 font-bold text-xl hover:text-sky-300 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/>
+          <rect x="9" y="11" width="14" height="10" rx="2"/>
+          <circle cx="12" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+        </svg>
+        CarTools
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`text-sm font-medium transition-colors ${
+              currentPath.startsWith(link.href)
+                ? 'text-sky-400'
+                : 'text-slate-300 hover:text-sky-400'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button
+        id="menu-btn"
+        class="md:hidden p-2 text-slate-300 hover:text-sky-400 transition-colors"
+        aria-label="メニューを開く"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav id="mobile-menu" class="hidden md:hidden pb-4">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`block py-2 text-sm font-medium transition-colors ${
+            currentPath.startsWith(link.href)
+              ? 'text-sky-400'
+              : 'text-slate-300 hover:text-sky-400'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

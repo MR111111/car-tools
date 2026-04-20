@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JidoshaZei from '../../components/JidoshaZei.svelte';
+---
+
+<BaseLayout
+  title="自動車税計算ツール｜排気量別の税額と重課を自動計算【2026年版】"
+  description="排気量・登録年数・車種区分を入力するだけで自動車税（種別割）と自動車重量税の目安を計算。13年超・18年超の重課税やエコカー減税・EV割引にも対応。"
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: 'ツール一覧', url: '/tools' },
+    { name: '自動車税計算', url: '/tools/jidosha-zei' },
+  ]}
+>
+  <h1 class="text-3xl font-bold text-white mb-2">🏛️ 自動車税計算ツール</h1>
+  <p class="text-slate-400 mb-8">排気量・登録年数から自動車税（種別割）と重量税の目安を計算します。</p>
+
+  <JidoshaZei client:load />
+
+  <section class="mt-16 prose prose-invert prose-sky max-w-none">
+    <h2>自動車税（種別割）とは</h2>
+    <p>
+      自動車税は毎年4月1日時点の車の所有者に課される地方税です。
+      普通車は排気量によって税額が異なり、軽自動車は一律10,800円（2019年10月以降登録）です。
+      毎年5月末（地域により異なる）が納付期限です。
+    </p>
+    <h3>13年超・18年超の重課</h3>
+    <p>
+      新車登録から13年を超えると自動車税が約15%増税（重課）されます。
+      18年を超えると約20%増税されます（軽自動車は対象外）。
+      ディーゼル車は11年超から対象となります。
+    </p>
+    <h3>グリーン化特例（電気自動車の優遇）</h3>
+    <p>
+      電気自動車・燃料電池車は新車登録翌年度の自動車税が概ね75%軽減されます。
+      ただし軽減は1年限りで、翌々年からは通常税額に戻ります。
+    </p>
+    <p class="text-sm text-slate-500">
+      ※ 税額・特例は法改正により変更される場合があります。最新情報は各都道府県・国税庁の案内をご確認ください。
+    </p>
+  </section>
+</BaseLayout>

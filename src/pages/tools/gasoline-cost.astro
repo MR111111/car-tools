@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GasolineCost from '../../components/GasolineCost.svelte';
+---
+
+<BaseLayout
+  title="ガソリン代計算ツール｜月間・年間の燃料費を瞬時に算出"
+  description="燃費・月間走行距離・ガソリン単価を入力するだけで月間・年間のガソリン代を計算。1km走行コストや燃費改善の節約効果も試算できます。"
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: 'ツール一覧', url: '/tools' },
+    { name: 'ガソリン代計算', url: '/tools/gasoline-cost' },
+  ]}
+>
+  <h1 class="text-3xl font-bold text-white mb-2">⛽ ガソリン代計算ツール</h1>
+  <p class="text-slate-400 mb-8">燃費・走行距離・ガソリン単価から月間・年間のガソリン代を計算します。</p>
+
+  <GasolineCost client:load />
+
+  <section class="mt-16 prose prose-invert prose-sky max-w-none">
+    <h2>ガソリン代の計算方法</h2>
+    <p>
+      ガソリン代は <strong>走行距離 ÷ 燃費 × ガソリン単価</strong> で計算します。
+      月間1,000km走行、燃費15km/L、ガソリン170円/Lの場合、月間ガソリン代は約11,333円になります。
+    </p>
+    <h3>燃費（km/L）を上げると節約額はどう変わる？</h3>
+    <p>
+      燃費が10km/Lから11km/Lに改善（1km/L改善）すると、年間走行距離12,000kmで
+      ガソリン170円/Lの場合、年間約1,855円の節約になります。
+      一方、燃費が20km/Lから21km/Lに改善すると節約額は約485円と少なくなります。
+      これは燃費が良くなるほど改善の効果が小さくなるためです。
+    </p>
+    <h3>レギュラー・ハイオク・軽油の違い</h3>
+    <p>
+      ハイオクはレギュラーより一般的に10〜20円/L高く設定されています。
+      軽油はレギュラーより安い傾向にあります（約20〜30円/L安い）。
+      このツールでは概算として±15〜20円を参考値として使用しています。
+    </p>
+    <p class="text-sm text-slate-500">
+      ※ 計算結果は参考値です。実際のガソリン単価・燃費は状況により異なります。
+    </p>
+  </section>
+</BaseLayout>
