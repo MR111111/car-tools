@@ -2,8 +2,49 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog'))
+const allPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// カテゴリ定義
+const categories = [
+  { id: 'all', label: 'すべて', emoji: '📋', color: 'bg-gray-100 text-gray-700 border-gray-300' },
+  { id: 'gasoline', label: 'ガソリン・燃費', emoji: '⛽', color: 'bg-orange-100 text-orange-700 border-orange-300' },
+  { id: 'ev', label: 'EV・電気自動車', emoji: '⚡', color: 'bg-sky-100 text-sky-700 border-sky-300' },
+  { id: 'tax', label: '自動車税・税金', emoji: '🏛️', color: 'bg-violet-100 text-violet-700 border-violet-300' },
+  { id: 'shaken', label: '車検', emoji: '🔧', color: 'bg-green-100 text-green-700 border-green-300' },
+  { id: 'tire', label: 'タイヤ', emoji: '🚗', color: 'bg-slate-100 text-slate-700 border-slate-300' },
+  { id: 'loan', label: 'カーローン・購入', emoji: '💴', color: 'bg-yellow-100 text-yellow-700 border-yellow-300' },
+];
+
+// タグ→カテゴリのマッピング
+function getCategory(tags: string[]): string {
+  const t = tags.join(' ');
+  if (t.match(/EV|電気自動車|充電|PHEV/)) return 'ev';
+  if (t.match(/ガソリン|燃費|WLTC|JC08/)) return 'gasoline';
+  if (t.match(/自動車税|重課|エコカー減税|環境性能割/)) return 'tax';
+  if (t.match(/車検/)) return 'shaken';
+  if (t.match(/タイヤ|インチアップ/)) return 'tire';
+  if (t.match(/カーローン|残価|新車|中古車|維持費/)) return 'loan';
+  return 'gasoline';
+}
+
+// 読了時間（200文字/分）
+function readingTime(desc: string): number {
+  return Math.max(3, Math.ceil(desc.length * 8 / 400));
+}
+
+// カテゴリ情報をポストに付与
+const posts = allPosts.map(post => ({
+  ...post,
+  categoryId: getCategory(post.data.tags),
+}));
+
+const featuredPost = posts[0];
+const restPosts = posts.slice(1);
+
+function getCategoryInfo(id: string) {
+  return categories.find(c => c.id === id) ?? categories[0];
+}
 ---
 
 <BaseLayout
@@ -14,30 +55,134 @@ const posts = (await getCollection('blog'))
     { name: 'ブログ', url: '/blog' },
   ]}
 >
-  <h1 class="text-3xl font-bold text-gray-900 mb-2">ブログ記事一覧</h1>
-  <p class="text-gray-500 mb-10">クルマにかかるお金をわかりやすく解説。全{posts.length}記事。</p>
+  <!-- ヘッダー -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">ブログ記事一覧</h1>
+    <p class="text-gray-500">クルマにかかるお金をわかりやすく解説。全<span class="font-semibold text-gray-700">{posts.length}</span>記事。</p>
+  </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-    {posts.map(post => (
-      <a
-        href={`/blog/${post.id}`}
-        class="bg-white border border-gray-200 rounded-xl p-5 hover:border-sky-400 hover:shadow-md transition-all group"
+  <!-- カテゴリフィルター -->
+  <div class="flex flex-wrap gap-2 mb-8" id="category-filters">
+    {categories.map(cat => (
+      <button
+        data-category={cat.id}
+        class={`category-btn flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${cat.id === 'all' ? 'ring-2 ring-offset-1 ring-sky-400 ' + cat.color : cat.color} hover:opacity-80`}
       >
-        <p class="text-gray-400 text-xs mb-2">
-          {post.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </p>
-        <h2 class="text-gray-900 font-semibold leading-snug group-hover:text-sky-600 transition-colors mb-2">
-          {post.data.title}
-        </h2>
-        <p class="text-gray-500 text-sm line-clamp-2">{post.data.description}</p>
-        {post.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-1 mt-3">
-            {post.data.tags.map((tag: string) => (
-              <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{tag}</span>
-            ))}
-          </div>
-        )}
-      </a>
+        <span>{cat.emoji}</span>
+        <span>{cat.label}</span>
+        <span class="text-xs opacity-60">
+          {cat.id === 'all' ? posts.length : posts.filter(p => p.categoryId === cat.id).length}
+        </span>
+      </button>
     ))}
   </div>
+
+  <!-- 注目記事（最新1件） -->
+  <div class="mb-8" id="featured-area">
+    <a
+      href={`/blog/${featuredPost.id}`}
+      data-category={featuredPost.categoryId}
+      class="post-card featured-card group block bg-gradient-to-r from-sky-50 to-white border border-sky-200 rounded-2xl p-6 hover:border-sky-400 hover:shadow-lg transition-all"
+    >
+      <div class="flex flex-col md:flex-row md:items-center gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-3">
+            <span class={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full border ${getCategoryInfo(featuredPost.categoryId).color}`}>
+              {getCategoryInfo(featuredPost.categoryId).emoji} {getCategoryInfo(featuredPost.categoryId).label}
+            </span>
+            <span class="bg-sky-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">NEW</span>
+          </div>
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-sky-600 transition-colors leading-snug mb-2">
+            {featuredPost.data.title}
+          </h2>
+          <p class="text-gray-500 text-sm line-clamp-2 mb-3">{featuredPost.data.description}</p>
+          <div class="flex items-center gap-3 text-xs text-gray-400">
+            <span>📅 {featuredPost.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <span>⏱ 約{readingTime(featuredPost.data.description)}分</span>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center justify-center w-24 h-24 rounded-2xl text-5xl bg-white border border-sky-100 shadow-sm flex-shrink-0">
+          {getCategoryInfo(featuredPost.categoryId).emoji}
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- 記事グリッド -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="posts-grid">
+    {restPosts.map(post => {
+      const cat = getCategoryInfo(post.categoryId);
+      return (
+        <a
+          href={`/blog/${post.id}`}
+          data-category={post.categoryId}
+          class="post-card group bg-white border border-gray-200 rounded-xl p-5 hover:border-sky-400 hover:shadow-md transition-all flex flex-col"
+        >
+          <!-- カテゴリバッジ -->
+          <span class={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full border w-fit mb-3 ${cat.color}`}>
+            {cat.emoji} {cat.label}
+          </span>
+          <!-- タイトル -->
+          <h2 class="text-gray-900 font-semibold text-sm leading-snug group-hover:text-sky-600 transition-colors mb-2 flex-1">
+            {post.data.title}
+          </h2>
+          <!-- 説明 -->
+          <p class="text-gray-400 text-xs line-clamp-2 mb-3">{post.data.description}</p>
+          <!-- フッター -->
+          <div class="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-gray-100">
+            <span>{post.data.pubDate.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' })}</span>
+            <span>⏱ 約{readingTime(post.data.description)}分</span>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- 記事なし表示 -->
+  <div id="no-results" class="hidden text-center py-16 text-gray-400">
+    <p class="text-4xl mb-4">📭</p>
+    <p class="text-lg font-medium">このカテゴリの記事はまだありません</p>
+  </div>
+
+  <!-- ツールへの誘導 -->
+  <div class="mt-16 bg-gradient-to-r from-sky-50 to-white border border-sky-200 rounded-2xl p-6 text-center">
+    <p class="text-sky-700 font-bold text-lg mb-2">📊 無料計算ツールも使ってみよう</p>
+    <p class="text-gray-500 text-sm mb-4">記事で学んだ知識を、実際の数字で確認できます。</p>
+    <a href="/tools" class="inline-flex items-center gap-2 bg-sky-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-sky-700 transition-colors text-sm shadow-md shadow-sky-200">
+      ツール一覧を見る →
+    </a>
+  </div>
 </BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.category-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.post-card');
+  const featuredArea = document.getElementById('featured-area');
+  const noResults = document.getElementById('no-results');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.category!;
+
+      // ボタンのアクティブ状態
+      buttons.forEach(b => b.classList.remove('ring-2', 'ring-offset-1', 'ring-sky-400'));
+      btn.classList.add('ring-2', 'ring-offset-1', 'ring-sky-400');
+
+      // カード表示切り替え
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const match = selected === 'all' || card.dataset.category === selected;
+        card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
+      });
+
+      // featured エリアの表示制御
+      if (featuredArea) {
+        const featuredCat = featuredArea.querySelector<HTMLElement>('.featured-card')?.dataset.category;
+        featuredArea.style.display = (selected === 'all' || featuredCat === selected) ? '' : 'none';
+      }
+
+      noResults!.classList.toggle('hidden', visibleCount > 0);
+    });
+  });
+</script>

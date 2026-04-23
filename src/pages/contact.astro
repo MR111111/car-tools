@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="お問い合わせ"
+  description="CarMoneyLabへのお問い合わせはこちら。ご意見・ご要望・誤情報のご指摘など、お気軽にどうぞ。"
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: 'お問い合わせ', url: '/contact' },
+  ]}
+>
+  <div class="max-w-2xl">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">お問い合わせ</h1>
+    <p class="text-gray-500 mb-8">ご意見・ご要望・計算結果の誤りなど、お気軽にご連絡ください。<br/>通常3〜5営業日以内にご返信いたします。</p>
+
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdxT-22904z4vvJSMiQtmuxseZFuzM6JIgiHGG2rdQmHhgVgQ/viewform?embedded=true"
+        width="100%"
+        height="800"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        class="block"
+        title="お問い合わせフォーム"
+        loading="lazy"
+      >
+        読み込んでいます…
+      </iframe>
+    </div>
+
+    <div class="mt-8 bg-gray-50 border border-gray-200 rounded-xl p-5">
+      <p class="text-gray-500 text-sm">
+        ※ 本フォームはGoogle フォームを使用しています。送信内容はGoogleのサーバーに保存されます。
+        詳しくは<a href="/privacy" class="text-sky-600 hover:underline">プライバシーポリシー</a>をご確認ください。
+      </p>
+    </div>
+  </div>
+</BaseLayout>
