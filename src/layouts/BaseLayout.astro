@@ -23,6 +23,7 @@ const {
 
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const gsvCode = import.meta.env.PUBLIC_GSV_CODE;
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT;
 const isProd = import.meta.env.PROD;
 
 const siteTitle = 'CarMoneyLab';
@@ -87,7 +88,10 @@ const breadcrumbJsonLd = breadcrumbs
       <script set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`} />
     )}
 
-    <!-- Google AdSense: ここに追加 -->
+    <!-- Google AdSense -->
+    {isProd && adsenseClient && (
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossorigin="anonymous"></script>
+    )}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

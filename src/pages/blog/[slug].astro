@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorBio from '../../components/AuthorBio.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -42,6 +43,8 @@ const { Content } = await render(post);
     <div class="prose prose-gray prose-sky max-w-none">
       <Content />
     </div>
+
+    <AuthorBio />
 
     <div class="mt-12 bg-gray-50 border border-gray-200 rounded-xl p-5">
       <p class="text-gray-400 text-xs">

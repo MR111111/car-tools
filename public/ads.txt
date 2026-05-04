@@ -1,0 +1,5 @@
+# ads.txt for CarMoneyLab
+# Authorized Digital Sellers - https://iabtechlab.com/ads-txt/
+#
+# After AdSense approval, replace the line below with:
+#   google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

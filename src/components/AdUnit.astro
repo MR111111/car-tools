@@ -1,0 +1,27 @@
+---
+interface Props {
+  slot?: string;
+  format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical' | 'fluid';
+  class?: string;
+}
+
+const { slot, format = 'auto', class: className = '' } = Astro.props;
+const adClient = import.meta.env.PUBLIC_ADSENSE_CLIENT;
+const isProd = import.meta.env.PROD;
+const enabled = isProd && adClient && slot;
+---
+
+{enabled && (
+  <div class={`overflow-hidden ${className}`}>
+    <p class="text-center text-xs text-gray-300 mb-1 select-none">広告</p>
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={adClient}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    ></ins>
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}
