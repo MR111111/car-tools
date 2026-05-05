@@ -13,6 +13,18 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// 関連記事（同タグ重複数の多い順、上位3件）
+const allPosts = await getCollection('blog');
+const related = allPosts
+  .filter(p => p.id !== post.id && p.data.tags.some((t: string) => post.data.tags.includes(t)))
+  .map(p => ({
+    post: p,
+    overlap: p.data.tags.filter((t: string) => post.data.tags.includes(t)).length,
+  }))
+  .sort((a, b) => b.overlap - a.overlap || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+  .slice(0, 3)
+  .map(x => x.post);
 ---
 
 <BaseLayout
@@ -28,7 +40,7 @@ const { Content } = await render(post);
     <header class="mb-8">
       <div class="flex flex-wrap gap-2 mb-3">
         {post.data.tags.map((tag: string) => (
-          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded-full">{tag}</span>
+          <a href={`/blog/tag/${encodeURIComponent(tag)}/`} class="text-xs bg-sky-100 text-sky-700 hover:bg-sky-200 px-2 py-1 rounded-full transition-colors">{tag}</a>
         ))}
       </div>
       <h1 class="text-3xl font-bold text-gray-900 leading-tight mb-3">{post.data.title}</h1>
@@ -45,6 +57,24 @@ const { Content } = await render(post);
     </div>
 
     <AuthorBio />
+
+    {related.length > 0 && (
+      <section class="mt-10 pt-8 border-t border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="text-sky-600">📚</span> 関連記事
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {related.map(r => (
+            <a href={`/blog/${r.id}`}
+              class="group bg-sky-50 hover:bg-sky-100 rounded-xl p-4 border border-sky-100 transition-colors">
+              <p class="text-xs text-gray-400 mb-1">{r.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p class="font-bold text-gray-900 group-hover:text-sky-700 text-sm leading-snug mb-2">{r.data.title}</p>
+              <p class="text-xs text-gray-500 line-clamp-2">{r.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <div class="mt-12 bg-gray-50 border border-gray-200 rounded-xl p-5">
       <p class="text-gray-400 text-xs">

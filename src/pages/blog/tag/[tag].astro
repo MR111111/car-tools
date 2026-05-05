@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const tagSet = new Set<string>();
+  for (const p of allPosts) for (const t of p.data.tags) tagSet.add(t);
+  return [...tagSet].map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: allPosts
+        .filter(p => p.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`「${tag}」の記事一覧`}
+  description={`CarMoneyLabの「${tag}」に関する解説記事一覧。クルマのコスト・維持費に関する「${tag}」関連の記事を${posts.length}本掲載しています。`}
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: 'ブログ', url: '/blog' },
+    { name: tag, url: `/blog/tag/${encodeURIComponent(tag)}/` },
+  ]}
+>
+  <div class="mb-8">
+    <p class="text-sm text-sky-600 font-medium mb-1">タグ</p>
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">「{tag}」の記事一覧</h1>
+    <p class="text-gray-500">{posts.length}件の記事があります。</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+    {posts.map(post => (
+      <a href={`/blog/${post.id}`}
+        class="group bg-white rounded-xl p-5 border border-gray-200 hover:border-sky-300 hover:shadow-md transition-all flex flex-col">
+        <p class="text-xs text-gray-400 mb-2">{post.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <h2 class="font-bold text-gray-900 group-hover:text-sky-700 transition-colors mb-2 leading-snug flex-1">{post.data.title}</h2>
+        <p class="text-sm text-gray-500 line-clamp-2 mb-3">{post.data.description}</p>
+        <div class="flex flex-wrap gap-1 mt-auto">
+          {post.data.tags.map((t: string) => (
+            <span class={`text-xs px-2 py-0.5 rounded-full ${t === tag ? 'bg-sky-600 text-white' : 'bg-sky-100 text-sky-700'}`}>{t}</span>
+          ))}
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div class="mt-10 text-center">
+    <a href="/blog" class="text-sm text-sky-600 hover:underline">← すべての記事一覧に戻る</a>
+  </div>
+</BaseLayout>

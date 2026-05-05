@@ -42,6 +42,11 @@ const posts = allPosts.map(post => ({
 const featuredPost = posts[0];
 const restPosts = posts.slice(1);
 
+// タグ集計
+const tagCount = new Map<string, number>();
+for (const p of allPosts) for (const t of p.data.tags) tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
+const sortedTags = Array.from(tagCount.entries()).sort((a, b) => b[1] - a[1]);
+
 function getCategoryInfo(id: string) {
   return categories.find(c => c.id === id) ?? categories[0];
 }
@@ -107,6 +112,19 @@ function getCategoryInfo(id: string) {
       </div>
     </a>
   </div>
+
+  <!-- タグ別ページへのリンク -->
+  <details class="mb-6 bg-sky-50 rounded-xl p-4 border border-sky-100">
+    <summary class="text-sm font-bold text-sky-700 cursor-pointer">タグ別の一覧ページを見る</summary>
+    <div class="flex flex-wrap gap-2 mt-3">
+      {sortedTags.map(([tag, count]) => (
+        <a href={`/blog/tag/${encodeURIComponent(tag)}/`}
+          class="text-xs px-3 py-1 rounded-full bg-white border border-sky-200 text-sky-700 hover:bg-sky-100 transition-colors">
+          {tag} <span class="text-sky-400">({count})</span>
+        </a>
+      ))}
+    </div>
+  </details>
 
   <!-- 記事グリッド -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="posts-grid">
