@@ -14,6 +14,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1 class="text-3xl font-bold text-gray-900 mb-8">サイトについて</h1>
 
     <div class="prose prose-gray prose-sky max-w-none">
+      <h2>運営者プロフィール</h2>
+      <div class="not-prose bg-sky-50 border border-sky-100 rounded-xl p-5 my-6">
+        <div class="flex items-start gap-4">
+          <div class="shrink-0 w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center text-2xl font-bold text-sky-700 border-2 border-sky-200">車</div>
+          <div class="flex-1 space-y-2">
+            <div>
+              <p class="font-bold text-gray-900">車太郎（くるまたろう）</p>
+              <p class="text-sm text-gray-500">CarMoneyLab 運営者・北海道在住・フリーランスエンジニア・愛車歴12年</p>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              北海道在住、フリーランスのモバイルアプリエンジニアとして本業の傍ら、雪国で愛車を10年乗り続けた経験からCarMoneyLabを始めました。
+              買い替え検討時に「ガソリン代＋自動車税＋重量税＋車検＋任意保険＋ローン総額」を全部計算したら、新車1台買えるくらいの維持費になっていてビビった経験が原点です。
+            </p>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              スプレッドシートで自分の車のライフサイクルコストを管理してきた経験を、誰でも使える計算ツールと記事として共有しています。
+              国土交通省（自動車検査制度・燃費基準）・経済産業省（燃料補助）・資源エネルギー庁（ガソリン価格調査）・国税庁（自動車税・揮発油税）など公式統計を一次情報として参照しています。
+            </p>
+            <p class="text-xs text-gray-400">
+              ※ 車太郎は整備士・ファイナンシャルプランナー・税理士の資格を保有していません。重要な経済的判断（車両の購入・売却、ローン契約、整備判断など）は、販売店・整備士・金融機関・専門家にご相談ください。
+            </p>
+            <div class="flex flex-wrap gap-3 text-xs pt-1">
+              <a href="/editorial-policy" class="text-sky-700 hover:underline">編集ポリシー →</a>
+              <a href="/contact" class="text-sky-700 hover:underline">お問い合わせ →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <h2>CarMoneyLabとは</h2>
       <p>
         CarMoneyLabは、自動車・モビリティに関するコスト計算を誰でも簡単にできる無料ツールと、
