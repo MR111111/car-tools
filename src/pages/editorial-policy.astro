@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="編集ポリシー"
+  description="CarMoneyLabの編集ポリシー。記事の作成プロセス、情報源、AI支援の活用範囲、ファクトチェック体制、誤り訂正ポリシーについて透明性をもって開示します。"
+  breadcrumbs={[{ name: '編集ポリシー', url: '/editorial-policy' }]}
+>
+  <h1 class="text-3xl font-bold mb-3">編集ポリシー</h1>
+  <p class="text-sm text-gray-500 mb-8">最終更新日: 2026年5月4日</p>
+
+  <div class="bg-white rounded-xl border border-gray-200 p-6 md:p-8 prose prose-gray max-w-none">
+
+    <p>
+      CarMoneyLab（以下「当サイト」）は、ガソリン代・自動車税・車検・自動車ローンなど、
+      クルマにかかるすべてのコストに関する情報を提供しています。
+      当サイトのコンテンツがどのように作られ、どのように品質が保たれているかを、
+      利用者の方が判断できるよう透明性をもって開示します。
+    </p>
+
+    <h2>編集の基本方針</h2>
+    <ul>
+      <li><strong>一次情報を起点にする</strong>: ガソリン価格・自動車税の税率・車検制度・燃費基準などの数値や事実は、国土交通省・経済産業省・資源エネルギー庁・国税庁など公的機関の公式統計・公式ページを一次情報として参照します。</li>
+      <li><strong>断定を避ける</strong>: 整備内容・ローン審査・販売店ごとに条件が異なる事項については、断定的表現を避け、必要に応じて「販売店・整備士・金融機関に確認を」と添えます。</li>
+      <li><strong>不安を煽らない</strong>: 読者の不安や恐怖を煽る表現、誇大な表現を避けます。</li>
+      <li><strong>商業的中立性</strong>: 広告主・アフィリエイト提携先（中古車買取・カーローン・任意保険等）からコンテンツの内容に関する指示は受けず、編集の独立性を維持します。</li>
+    </ul>
+
+    <h2>AI（生成AI）の活用範囲と開示</h2>
+    <p>
+      当サイトでは、最新ニュースを起点としたブログ記事の<strong>初稿生成・推敲・ファクトチェックの一部に生成AI</strong>を活用しています。
+      一方、計算ツール（ガソリン代計算・自動車税計算・車検費用シミュ・カーローン比較など）のロジックは、
+      公式の税率表・燃費表示制度・金融計算式を参照して人手で設計・検証しています。
+    </p>
+    <p><strong>記事生成パイプライン:</strong></p>
+    <ol>
+      <li><strong>トピック選定</strong>: 自動車・燃料・税制関連の最新ニュースRSSから収集した候補のうち、ジャンル関連度と既存記事との重複度をベクトル類似度で判定し、未解説のトピックを選択します。</li>
+      <li><strong>初稿生成</strong>: Cloudflare Workers AI (Llama 3.3 70B) を第一候補として記事の初稿を生成します。</li>
+      <li><strong>ファクトチェック</strong>: 初稿を別の生成AI (Google Gemini 2.5 Flash) で査読し、出典の確認できない数値・断定的すぎる表現・税率や施行日の誤りを指摘・修正させます。</li>
+      <li><strong>2段階エスカレーション</strong>: 第一候補AIが2回連続でファクトチェック未承認の場合、第二候補AI (Gemini)、第三候補AI (Groq) へ生成を切り替えて再試行します。</li>
+      <li><strong>公開拒否の判定</strong>: 全プロバイダで承認が得られなかった場合は記事を公開せず、ファクトチェック失敗として運営者に通知されます。</li>
+    </ol>
+    <p>
+      上記プロセスにより、Googleの<a href="https://developers.google.com/search/blog/2023/02/google-search-and-ai-content?hl=ja" target="_blank" rel="noopener noreferrer">AI生成コンテンツに関するガイダンス</a>の趣旨に沿い、
+      利用者にとって役立つコンテンツの提供を目指しています。
+    </p>
+
+    <h2>主な情報源（一次情報）</h2>
+    <ul>
+      <li><a href="https://www.mlit.go.jp/" target="_blank" rel="noopener noreferrer">国土交通省</a> — 道路運送車両法・車検制度・燃費基準（WLTC等）</li>
+      <li><a href="https://www.meti.go.jp/" target="_blank" rel="noopener noreferrer">経済産業省</a> — 燃料補助金・EV普及策</li>
+      <li><a href="https://www.enecho.meti.go.jp/" target="_blank" rel="noopener noreferrer">資源エネルギー庁</a> — ガソリン価格・石油製品価格調査</li>
+      <li><a href="https://www.nta.go.jp/" target="_blank" rel="noopener noreferrer">国税庁</a> — 自動車重量税・揮発油税・消費税</li>
+      <li><a href="https://www.soumu.go.jp/" target="_blank" rel="noopener noreferrer">総務省</a> — 自動車税（種別割）・軽自動車税</li>
+      <li><a href="https://www.airia.or.jp/" target="_blank" rel="noopener noreferrer">自動車検査登録情報協会</a> — 自動車保有台数統計</li>
+    </ul>
+
+    <h2>更新・訂正ポリシー</h2>
+    <ul>
+      <li><strong>制度・税制改正への対応</strong>: 自動車関連税制（エコカー減税・グリーン化特例等）の改正があった場合、影響を受ける記事・計算ツールを順次見直します。</li>
+      <li><strong>燃料価格の変動</strong>: ガソリン価格は週次で変動するため、記事内で言及する場合は参照時点を明示します。</li>
+      <li><strong>誤りの訂正</strong>: 内容に事実誤認・計算誤り・出典の誤りを発見した場合、速やかに修正します。重要な訂正は記事内に「訂正履歴」として明記します。</li>
+      <li><strong>適用時期の明示</strong>: 各記事・ツールに対象年度・対象時点（例: 2026年5月時点）を明示します。</li>
+      <li><strong>読者からの指摘</strong>: 誤りのご指摘は<a href="/contact">お問い合わせフォーム</a>から受け付けています。返信ができない場合でも内容は確認し、必要な修正を反映します。</li>
+    </ul>
+
+    <h2>当サイトの位置づけ</h2>
+    <div class="not-prose bg-yellow-50 border border-yellow-200 rounded-xl p-5 text-sm space-y-3">
+      <p>
+        当サイトは<strong>一般的な自動車関連コスト情報の提供</strong>を目的とするものであり、
+        税理士・整備士・自動車販売店・金融機関などによる個別の助言を代替するものではありません。
+      </p>
+      <p>
+        重要な経済的判断（車両の購入・売却・ローン契約・任意保険の選択・整備や修理の判断など）を行う際は、
+        販売店・整備士・金融機関・専門家にご相談ください。
+      </p>
+      <p>
+        当サイト運営者は整備士・FP・税理士の資格を保有していません。
+        サイトの情報を信頼できる材料の一つとしつつ、最終的な判断は専門家を交えて行うことを強く推奨します。
+      </p>
+    </div>
+
+    <h2>関連ページ</h2>
+    <ul>
+      <li>→ <a href="/about">サイトについて</a></li>
+      <li>→ <a href="/privacy">プライバシーポリシー</a></li>
+      <li>→ <a href="/terms">利用規約</a></li>
+      <li>→ <a href="/contact">お問い合わせ</a></li>
+    </ul>
+
+  </div>
+</BaseLayout>
