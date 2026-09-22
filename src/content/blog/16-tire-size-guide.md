@@ -141,7 +141,7 @@ A: タイヤの速度記号は、タイヤが対応できる最高速度を示�
 A: タイヤ交換の際には、タイヤのサイズ、ロードインデックス、速度記号などに注意する必要があります。また、タイヤの製造年月日やスリップサインにも注意する必要があります。
 
 関連トピック:
-- [ガソリン代の節約方法](/article/gasoline-saving)
-- [自動車税の計算方法](/article/automobile-tax)
-- [車検の手続き](/article/vehicle-inspection)
-- [自動車ローンの比較](/article/automobile-loan)
+- [ガソリン代計算ツール](/tools/gasoline-cost/)
+- [自動車税計算ツール](/tools/jidosha-zei/)
+- [車検費用シミュレーター](/tools/shaken-cost/)
+- [カーローン比較](/tools/car-loan/)

@@ -57,7 +57,7 @@ function getCategoryInfo(id: string) {
   description="ガソリン代・自動車税・車検費用・EV・タイヤ・カーローンなど、クルマにまつわるお金の知識をわかりやすく解説するブログです。"
   breadcrumbs={[
     { name: 'ホーム', url: '/' },
-    { name: 'ブログ', url: '/blog' },
+    { name: 'ブログ', url: '/blog/' },
   ]}
 >
   <!-- ヘッダー -->
@@ -85,7 +85,7 @@ function getCategoryInfo(id: string) {
   <!-- 注目記事（最新1件） -->
   <div class="mb-8" id="featured-area">
     <a
-      href={`/blog/${featuredPost.id}`}
+      href={`/blog/${featuredPost.id}/`}
       data-category={featuredPost.categoryId}
       class="post-card featured-card group block bg-gradient-to-r from-sky-50 to-white border border-sky-200 rounded-2xl p-6 hover:border-sky-400 hover:shadow-lg transition-all"
     >
@@ -132,7 +132,7 @@ function getCategoryInfo(id: string) {
       const cat = getCategoryInfo(post.categoryId);
       return (
         <a
-          href={`/blog/${post.id}`}
+          href={`/blog/${post.id}/`}
           data-category={post.categoryId}
           class="post-card group bg-white border border-gray-200 rounded-xl p-5 hover:border-sky-400 hover:shadow-md transition-all flex flex-col"
         >
@@ -166,7 +166,7 @@ function getCategoryInfo(id: string) {
   <div class="mt-16 bg-gradient-to-r from-sky-50 to-white border border-sky-200 rounded-2xl p-6 text-center">
     <p class="text-sky-700 font-bold text-lg mb-2">📊 無料計算ツールも使ってみよう</p>
     <p class="text-gray-500 text-sm mb-4">記事で学んだ知識を、実際の数字で確認できます。</p>
-    <a href="/tools" class="inline-flex items-center gap-2 bg-sky-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-sky-700 transition-colors text-sm shadow-md shadow-sky-200">
+    <a href="/tools/" class="inline-flex items-center gap-2 bg-sky-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-sky-700 transition-colors text-sm shadow-md shadow-sky-200">
       ツール一覧を見る →
     </a>
   </div>

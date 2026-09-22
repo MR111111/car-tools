@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://carmoneylab.com',
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()]
   },

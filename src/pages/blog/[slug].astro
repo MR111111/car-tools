@@ -32,8 +32,8 @@ const related = allPosts
   description={post.data.description}
   breadcrumbs={[
     { name: 'ホーム', url: '/' },
-    { name: 'ブログ', url: '/blog' },
-    { name: post.data.title, url: `/blog/${post.id}` },
+    { name: 'ブログ', url: '/blog/' },
+    { name: post.data.title, url: `/blog/${post.id}/` },
   ]}
 >
   <article class="max-w-2xl">
@@ -65,7 +65,7 @@ const related = allPosts
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {related.map(r => (
-            <a href={`/blog/${r.id}`}
+            <a href={`/blog/${r.id}/`}
               class="group bg-sky-50 hover:bg-sky-100 rounded-xl p-4 border border-sky-100 transition-colors">
               <p class="text-xs text-gray-400 mb-1">{r.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
               <p class="font-bold text-gray-900 group-hover:text-sky-700 text-sm leading-snug mb-2">{r.data.title}</p>
@@ -83,8 +83,8 @@ const related = allPosts
     </div>
 
     <div class="mt-6 flex gap-4">
-      <a href="/blog" class="text-sky-600 hover:underline text-sm font-medium">← 記事一覧に戻る</a>
-      <a href="/tools" class="text-sky-600 hover:underline text-sm font-medium">無料ツールを使う →</a>
+      <a href="/blog/" class="text-sky-600 hover:underline text-sm font-medium">← 記事一覧に戻る</a>
+      <a href="/tools/" class="text-sky-600 hover:underline text-sm font-medium">無料ツールを使う →</a>
     </div>
   </article>
 </BaseLayout>

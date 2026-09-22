@@ -90,6 +90,4 @@ A: 可能ですが、管理組合の承認が必要です。事前に管理組�
 A: 工事費用は自宅の状況により大きく変わります。分電盤の容量や配線ルート、充電スポットまでの距離などが影響します。複数社で比較見積もりを取ることをおすすめします。
 
 関連トピック：
-- [EV vs ガソリン比較ツール](/tools/ev-vs-gasoline)
-- [EV購入のメリットとデメリット](/articles/ev-merits-and-demerits)
-- [EVの充電方法と費用](/articles/ev-charging-methods-and-costs)
+- [EV vs ガソリン比較ツール](/tools/ev-vs-gasoline/)
