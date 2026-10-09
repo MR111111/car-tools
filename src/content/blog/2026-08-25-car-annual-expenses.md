@@ -2,6 +2,7 @@
 title: "マイカーの年間出費"
 description: "マイカーを保有する30～50代に聞いた年間の出費で負担に感じる項目について"
 pubDate: 2026-08-25
+updatedDate: 2026-08-31
 tags: ["自動車税", "車検", "ガソリン代", "マイカー"]
 seoAudited: true
 ---

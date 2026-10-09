@@ -2,6 +2,7 @@
 title: "自動車ローンの選び方"
 description: "自動車ローンの種類と選び方について解説します。"
 pubDate: 2026-08-04
+updatedDate: 2026-08-31
 tags: ["自動車ローン", "ガリバー", "中古車"]
 seoAudited: true
 ---

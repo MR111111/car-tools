@@ -2,6 +2,7 @@
 title: "車の維持費が下がる？"
 description: "自動車税・重量税の上乗せ廃止法案が通った場合の車の維持費への影響について"
 pubDate: 2026-07-07
+updatedDate: 2026-08-31
 tags: ["自動車税", "車の維持費", "重量税"]
 seoAudited: true
 ---

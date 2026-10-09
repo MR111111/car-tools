@@ -2,6 +2,7 @@
 title: "ガソリン節約のコツ"
 description: "ガソリン代が高騰する中、節約するコツを紹介します。"
 pubDate: 2026-06-16
+updatedDate: 2026-09-07
 tags: ["ガソリン代", "自動車維持費", "燃費"]
 seoAudited: true
 ---

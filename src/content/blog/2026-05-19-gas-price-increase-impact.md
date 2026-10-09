@@ -2,6 +2,7 @@
 title: "ガソリン価格高騰の影響"
 description: "ガソリン価格高騰がマイカー通勤者の交通費に与える影響について解説します。"
 pubDate: 2026-05-19
+updatedDate: 2026-08-31
 tags: ["ガソリン代", "交通費", "マイカー通勤"]
 seoAudited: true
 ---

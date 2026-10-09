@@ -2,6 +2,7 @@
 title: "実燃費とカタログ燃費の違い｜JC08モードとWLTCモードの見方"
 description: "カタログ燃費（JC08・WLTCモード）と実燃費の違いを解説。WLTCモードの市街地・郊外・高速の3区分の見方や、実燃費に近い数値の調べ方も紹介します。"
 pubDate: 2026-04-05
+updatedDate: 2026-08-31
 tags: ["燃費", "WLTC", "カタログ燃費"]
 humanized: true
 seoAudited: true

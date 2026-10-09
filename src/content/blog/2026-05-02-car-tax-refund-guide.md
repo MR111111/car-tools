@@ -2,6 +2,7 @@
 title: "自動車税の払い戻し"
 description: "自動車税の払い戻しについて詳しく紹介します。対象外になるケースや、防衛策について解説します。"
 pubDate: 2026-05-02
+updatedDate: 2026-08-31
 tags: ["自動車税", "車の維持費", "税金"]
 humanized: true
 seoAudited: true

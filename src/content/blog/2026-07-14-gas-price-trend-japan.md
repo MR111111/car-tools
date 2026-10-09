@@ -2,6 +2,7 @@
 title: "ガソリン価格の最新動向"
 description: "ガソリン価格の最新動向と節約Tips"
 pubDate: 2026-07-14
+updatedDate: 2026-08-31
 tags: ["ガソリン代", "自動車税", "車検", "自動車ローン", "維持費"]
 seoAudited: true
 ---

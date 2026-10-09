@@ -2,6 +2,7 @@
 title: "ガソリン代節約"
 description: "ガソリン代を節約するための実用的アドバイスと最新の情報を提供します。"
 pubDate: 2026-08-11
+updatedDate: 2026-08-31
 tags: ["ガソリン代", "自動車維持費", "節約Tips"]
 seoAudited: true
 ---

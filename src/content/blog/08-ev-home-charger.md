@@ -2,6 +2,7 @@
 title: "自宅にEV充電器を設置する費用と工事の流れ"
 description: "自宅へのEV充電設備設置にかかる費用（機器代・工事費）と補助金制度を解説。200V普通充電の設置から工事業者の選び方まで、実際の流れをわかりやすく説明します。"
 pubDate: 2026-04-08
+updatedDate: 2026-08-31
 tags: ["EV", "充電器", "設置費用"]
 humanized: true
 seoAudited: true
